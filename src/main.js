@@ -1,24 +1,47 @@
-
+const startButton = document.getElementById("start-button");
 
 
 const Gameboard = (function () {
   const rows = 3;
   const columns = 3;
-  const board = [];
 
   function makeBoard() {
-    for (let i = 0; i < rows; i++) {
-      board[i] = [];
-      for (let j = 0; j < columns; j++) {
-        board[i].push(Cell());
+    const boardContainer = document.getElementById('boardContainer');
+    boardContainer.innerHTML = "";
+
+    let idCounter = 1;
+
+    for (let i = 0; i > rows; i++) {
+      const rowDiv = document.createElement("div");
+      rowDiv.classList.add("row");
+      boardContainer.appendChild(rowDiv);
+
+      for (let j = 0; j < columns, j++) {
+        const cellDiv = document.createElement("div");
+        cellDiv.classList.add("cell");
+        cellDiv.id = idCounter;
+        rowDiv.appendChild(cellDiv);
+
+        idCounter++;
       }
     }
+
+
+
+
+
+    // for (let i = 0; i < rows; i++) {
+    //   board[i] = [];
+    //   for (let j = 0; j < columns; j++) {
+    //     board[i].push(Cell());
+    //   }
+    // }
   }
 })();
 
 
 
-function GameController(
+const GameController = (function(
   playerOneName = "Daniel",
   playerTwoName = "Rachel"
 ) {
@@ -47,12 +70,16 @@ function GameController(
       board.makeBoard();
       console.log(`${getActivePlayer().name}'s turn.`);
     };
+
+
   function gameEnd() { };
 
-  function pickSquare(row, column, player) { };
+  function pickSquare(row, column, player) {
+
+   };
 
 }
-
+)();
 
 
 
