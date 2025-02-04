@@ -1,22 +1,22 @@
-const startButton = document.getElementById("start-button");
+
 
 
 const Gameboard = (function () {
   const rows = 3;
   const columns = 3;
 
-  function makeBoard() {
+  const makeBoard = function (rows, columns) {
     const boardContainer = document.getElementById('boardContainer');
     boardContainer.innerHTML = "";
 
     let idCounter = 1;
 
-    for (let i = 0; i > rows; i++) {
+    for (let i = 0; i < rows; i++) {
       const rowDiv = document.createElement("div");
       rowDiv.classList.add("row");
       boardContainer.appendChild(rowDiv);
 
-      for (let j = 0; j < columns, j++) {
+      for (let j = 0; j < columns; j++) {
         const cellDiv = document.createElement("div");
         cellDiv.classList.add("cell");
         cellDiv.id = idCounter;
@@ -25,66 +25,64 @@ const Gameboard = (function () {
         idCounter++;
       }
     }
-
-
-
-
-
-    // for (let i = 0; i < rows; i++) {
-    //   board[i] = [];
-    //   for (let j = 0; j < columns; j++) {
-    //     board[i].push(Cell());
-    //   }
-    // }
-  }
+  };
+  return { makeBoard };
 })();
 
 
 
-const GameController = (function(
-  playerOneName = "Daniel",
-  playerTwoName = "Rachel"
-) {
 
-  const board = Gameboard();
+
+const GameController = (function () {
 
   const players = [
     {
-      name: playerOneName,
-      token: 1
+      name: "Rachel",
+      token: "X"
     },
     {
-      name: playerTwoName,
-      token: 2
+      name: "Daniel",
+      token: "O"
     }];
 
-    let activePlayer = players[0];
+  let activePlayer = players[0];
 
-    const passTurn = () => {
-      activePlayer = activePlayer === players[0] ? players[1] : players[0];
-    };
+  const passTurn = () => {
+    activePlayer = activePlayer === players[0] ? players[1] : players[0];
+  };
 
-    const getActivePlayer = () => activePlayer;
-
-    const newRound = () => {
-      board.makeBoard();
-      console.log(`${getActivePlayer().name}'s turn.`);
-    };
+  const getActivePlayer = () => activePlayer;
 
 
-  function gameEnd() { };
+  const startBtn = document.getElementById("start-button");
+  startBtn.addEventListener("click", function () {
+    Gameboard.makeBoard(3, 3);
+    console.log(`${getActivePlayer().name}'s turn.`)
+  });
 
-  function pickSquare(row, column, player) {
+  const boardContainer = document.getElementById("boardContainer");
 
-   };
+  const pickCell = (e) => {
+    if (e.target && e.target.classList.contains("cell")) {
+      if (e.target.classList.contains("fullCell")) {
+        alert("This cell is occupied!");
+      } else {
+        e.target.innerHTML = getActivePlayer().token;
+        e.target.classList.add("fullCell");
+        passTurn();
+        console.log(`${getActivePlayer().name}'s turn.`);
+      }
+    }
+  };
 
-}
-)();
+  boardContainer.addEventListener("click", pickCell);
+
+})();
 
 
 
-function Player() {
-  const name = "";
-  const team = "";
-}
+// const Player = (function() {
+//   const name = "";
+//   const team = "";
+// }
 

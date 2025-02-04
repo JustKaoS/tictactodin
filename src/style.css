@@ -26,6 +26,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  justify-content: space-between;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -33,6 +34,28 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+#boardContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  grid-gap: 4px;
+  width: 158px; /* Ensure it's wide enough to contain the cells */
+  height: 158px; /* Ensure it's tall enough to contain the cells */
+}
+
+.cell {
+  border: 1px solid red;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;  /* Set a background color to make the cells visible */
+}
+
+#start-button {
+  margin-bottom: 30px;
 }
 
 #app {
