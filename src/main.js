@@ -1,4 +1,4 @@
-
+import "../src/style.css"
 
 
 const Gameboard = (function () {
