@@ -1,17 +1,26 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-<link rel="stylesheet" href="/src/style.css"
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tic-Tac-Todin</title>
-  </head>
-  <body>
-    <div id="app">
-      <button id="start-button">New Game</button>
-      
-      <div id="boardContainer"></div>
-    </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/src/style.css" <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic-Tac-Todin</title>
+</head>
+
+<body>
+  <div id="app">
+
+  <h1 id="h1">Hi.</h1>
+    <section class="modal hidden" id="modal">
+      <h3>Enter player names:</h3>
+      <input type="text" placeholder="Player One" id="p1" class="form">
+      <input type="text" placeholder="Player Two" id="p2" class="form">
+      <button id="submitBtn" class="button">Submit</button>
+    </section>
+    <button id="start-button" class="button">New Game</button>
+    <div id="boardContainer"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

@@ -35,33 +35,85 @@ const Gameboard = (function () {
 
 const GameController = (function () {
 
+  // MOVE THESE TO PLAYER FACTORY
   const players = [
     {
-      name: "Rachel",
+      name: "",
       token: "X"
     },
     {
-      name: "Daniel",
+      name: "",
       token: "O"
     }];
 
-  let activePlayer = players[0];
+  const getNames = () => {
+    let p1Name = document.getElementById("p1").value;
+    let p2Name = document.getElementById("p2").value;
+    players[0].name = p1Name;
+    players[1].name = p2Name;
+  }
 
+  let activePlayer = players[0];
   const passTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
-    console.log(`${getActivePlayer().name}'s turn.`);
+    headerHandler("play");
   };
-
   const getActivePlayer = () => activePlayer;
 
 
+
+  let gameState = "start";
+
   const startBtn = document.getElementById("start-button");
   startBtn.addEventListener("click", function () {
-    Gameboard.makeBoard(3, 3);
-    console.log(`${getActivePlayer().name}'s turn.`)
+    ModalManager.on();
+
   });
 
-  const boardContainer = document.getElementById("boardContainer");
+  const submitBtn = document.getElementById("submitBtn");
+  submitBtn.addEventListener("click", function () {
+    ModalManager.off();
+    getNames();
+    headerHandler("play");
+    Gameboard.makeBoard(3, 3);
+
+  })
+  function headerHandler(state) {
+    const h1 = document.getElementById("h1");
+    if (state == "start") {
+      h1.innerText = "Hi.";
+    } else if (state == "play") {
+      h1.innerText = `${getActivePlayer().name}'s turn`;
+    } else if (state == "win") {
+      h1.innerText = `${getActivePlayer().name} wins the game!`;
+    }
+  }
+
+
+
+
+  const ModalManager = (function modalManager() {
+    const cells = document.getElementsByClassName("cell");
+    function on() {
+      modal.classList.remove("hidden");
+      modal.style.display = "inline-block";
+      startBtn.classList.add("hidden");
+
+      Array.from(cells).forEach(cell => {
+        cell.classList.add("hidden");
+      })
+    };
+
+    function off() {
+      modal.classList.add("hidden");
+      modal.style.display = "none";
+      startBtn.classList.remove("hidden");
+      Array.from(cells).forEach(cell => {
+        cell.classList.remove("hidden");
+      })
+    }; return { off, on };
+  })();
+
 
   const pickCell = (e) => {
     if (e.target && e.target.classList.contains("cell")) {
@@ -72,14 +124,14 @@ const GameController = (function () {
         e.target.classList.add("fullCell");
         e.target.classList.add(getActivePlayer().token);
         if (winCheck()) {
-          alert(`${getActivePlayer().name} has won the game!`);
-        };
+          headerHandler("win");
+        }
         passTurn();
-
 
       }
     }
-  };
+  }
+
 
   boardContainer.addEventListener("click", pickCell);
 
@@ -102,19 +154,11 @@ const GameController = (function () {
       const cell2 = document.getElementById(id2).innerHTML;
       const cell3 = document.getElementById(id3).innerHTML;
       if (cell1 && cell1 === cell2 && cell2 === cell3) {
-return true;
+        return true;
       }
     }
-return false;
-  }
+    return false;
+  };
 
 
 })();
-
-
-
-// const Player = (function() {
-//   const name = "";
-//   const team = "";
-// }
-
