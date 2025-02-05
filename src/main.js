@@ -59,7 +59,7 @@ const PlayerController = (function () {
 
 
 const GameController = (function () {
-
+  let gameCounter = 0;
   let gameState = "start";
 
   const startBtn = document.getElementById("start-button");
@@ -143,20 +143,37 @@ const GameController = (function () {
       [3, 5, 7]
     ];
 
+    let winningCells = [];
+
     for (const pattern of winPatterns) {
       const [id1, id2, id3] = pattern;
       const cell1 = document.getElementById(id1);
       const cell2 = document.getElementById(id2);
       const cell3 = document.getElementById(id3);
-      if (cell1.innerHTML && cell1.innerHTML === cell2.innerHTML && cell2.innerHTML === cell3.innerHTML) {
-        cell1.style.color = "green";
-        cell2.style.color = "green";
-        cell3.style.color = "green";
+      if (cell1.innerText && cell1.innerText === cell2.innerText && cell2.innerText === cell3.innerText) {
+        winningCells = [cell1, cell2, cell3];
+        cell1.style.color = "gold";
+        cell2.style.color = "gold";
+        cell3.style.color = "gold";
+        cell1.style.borderColor = "gold";
+        cell2.style.borderColor = "gold";
+        cell3.style.borderColor = "gold";
+        cell1.style.fontSize = "36px";
+        cell2.style.fontSize = "36px";
+        cell3.style.fontSize = "36px";
+
+        const allCells = document.querySelectorAll(".cell");
+        allCells.forEach(cell => {
+          if (!winningCells.includes(cell)) {
+            cell.style.opacity = 0.3;
+          }
+        });
+
         return true;
       }
+      return false;
     }
-    return false;
   };
 
-return { headerHandler}
+  return { headerHandler }
 })();
