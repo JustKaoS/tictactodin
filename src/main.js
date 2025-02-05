@@ -1,6 +1,4 @@
 
-
-
 const Gameboard = (function () {
 
   const makeBoard = function (rows, columns) {
