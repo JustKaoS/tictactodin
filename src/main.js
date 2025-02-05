@@ -1,4 +1,4 @@
-import "../src/style.css"
+
 
 
 const Gameboard = (function () {
@@ -73,7 +73,7 @@ const GameController = (function () {
     PlayerController.getNames();
     headerHandler("play");
     Gameboard.makeBoard(3, 3);
-    boardContainer.addEventListener("click", pickCell);
+      boardContainer.addEventListener("click", pickCell);
   });
 
   function headerHandler(state) {
