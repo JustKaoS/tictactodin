@@ -59,7 +59,6 @@ const PlayerController = (function () {
 
 
 const GameController = (function () {
-  let gameCounter = 0;
   let gameState = "start";
 
   const startBtn = document.getElementById("start-button");
@@ -74,6 +73,7 @@ const GameController = (function () {
     PlayerController.getNames();
     headerHandler("play");
     Gameboard.makeBoard(3, 3);
+    boardContainer.addEventListener("click", pickCell);
   });
 
   function headerHandler(state) {
@@ -121,6 +121,7 @@ const GameController = (function () {
         e.target.classList.add(PlayerController.getActivePlayer().token);
         if (winCheck()) {
           headerHandler("win");
+          boardContainer.removeEventListener("click", pickCell);
         } else {
           PlayerController.passTurn();
         }
@@ -171,8 +172,9 @@ const GameController = (function () {
 
         return true;
       }
-      return false;
+
     }
+    return false;
   };
 
   return { headerHandler }
